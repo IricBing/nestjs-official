@@ -29,9 +29,14 @@
   "javascript.preferences.importModuleSpecifier": "relative", // 使用相对路径
   "cSpell.words": [
     "Iric",
+    "JSSDK",
     "Parens",
     "disturl",
+    "errcode",
+    "errmsg",
+    "jsapi",
     "lantsnag",
-    "nestjs"
+    "nestjs",
+    "setex"
   ]
 }

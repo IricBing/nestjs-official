@@ -1,15 +1,16 @@
-import { DynamicModule, Global, HttpModule, Module, OnModuleDestroy, OnModuleInit, Provider } from '@nestjs/common';
+import { DynamicModule, Global, HttpModule, Module, OnModuleDestroy, Provider } from '@nestjs/common';
 import { ModuleRef } from '@nestjs/core';
 import { Redis } from 'ioredis';
-import { ACCESS_TOKEN_CONFIG_PROVIDER, OPTIONS_PROVIDER, REDIS_CLIENT_PROVIDER } from './constants/common.constant';
+import { ACCESS_TOKEN_CONFIG_PROVIDER, JSSDK_TICKET_PROVIDER, OPTIONS_PROVIDER, REDIS_CLIENT_PROVIDER } from './constants/common.constant';
 import { OfficialModuleAsyncOptions, OfficialModuleOptions, OfficialOptionsFactory } from './interfaces/options.interface';
 import { createRedisClientProvider } from './providers/redis-client.provider';
 import { IricUtil } from './utils/iric.util';
 import { OfficialUtil } from './utils/official.util';
+import { TicketUtil } from './utils/ticket.util';
 
 @Global()
 @Module({})
-export class OfficialCoreModule implements OnModuleInit, OnModuleDestroy {
+export class OfficialCoreModule implements OnModuleDestroy {
   constructor(private readonly moduleRef: ModuleRef) {}
 
   /**
@@ -23,10 +24,12 @@ export class OfficialCoreModule implements OnModuleInit, OnModuleDestroy {
       imports: [HttpModule],
       providers: [
         OfficialUtil,
+        TicketUtil,
         IricUtil,
         createRedisClientProvider(),
         { provide: OPTIONS_PROVIDER, useValue: options },
-        { provide: ACCESS_TOKEN_CONFIG_PROVIDER, useValue: { token: '', expiresAt: null } }
+        { provide: ACCESS_TOKEN_CONFIG_PROVIDER, useValue: { token: '', expiresAt: null } },
+        { provide: JSSDK_TICKET_PROVIDER, useValue: { ticket: '', expiresAt: null } }
       ],
       exports: []
     };
@@ -42,7 +45,15 @@ export class OfficialCoreModule implements OnModuleInit, OnModuleDestroy {
     return {
       module: OfficialCoreModule,
       imports: [...(options.imports || []), HttpModule],
-      providers: [...asyncProviders, OfficialUtil, IricUtil, createRedisClientProvider(), { provide: ACCESS_TOKEN_CONFIG_PROVIDER, useValue: { token: '', expiresAt: null } }],
+      providers: [
+        ...asyncProviders,
+        OfficialUtil,
+        TicketUtil,
+        IricUtil,
+        createRedisClientProvider(),
+        { provide: ACCESS_TOKEN_CONFIG_PROVIDER, useValue: { token: '', expiresAt: null } },
+        { provide: JSSDK_TICKET_PROVIDER, useValue: { ticket: '', expiresAt: null } }
+      ],
       exports: []
     };
   }
@@ -85,10 +96,6 @@ export class OfficialCoreModule implements OnModuleInit, OnModuleDestroy {
       useFactory: async (optionsFactory: OfficialOptionsFactory) => await optionsFactory.createOfficialOptions(),
       inject
     };
-  }
-
-  onModuleInit() {
-    throw new Error('Method not implemented.');
   }
 
   onModuleDestroy() {
