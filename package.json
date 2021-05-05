@@ -1,5 +1,5 @@
 {
-  "name": "@lantsnag/nestjs-official",
+  "name": "@lantsang/nestjs-official",
   "version": "0.0.1",
   "description": "NestJS 公众号插件",
   "author": "Iric<iricbing@gmail.com>",
@@ -25,6 +25,11 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json"
+  },
+  "dependencies": {
+    "ioredis": "^4.27.1",
+    "json-bigint": "^1.0.0",
+    "xml2js": "^0.4.23"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.6.0",
@@ -79,10 +84,5 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
-  },
-  "dependencies": {
-    "ioredis": "^4.27.1",
-    "json-bigint": "^1.0.0",
-    "xml2js": "^0.4.23"
   }
 }
