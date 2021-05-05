@@ -1,7 +1,7 @@
 import { HttpService, Inject, Injectable } from '@nestjs/common';
 import { Redis } from 'ioredis';
-import { writeFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { writeFileSync } from 'fs';
+import { join } from 'path';
 import { JSSDK_TICKET_PROVIDER, OPTIONS_PROVIDER, REDIS_CLIENT_PROVIDER } from '../constants/common.constant';
 import { OFFICIAL_GET_JSSDK_TICKET_URL } from '../constants/official.constant';
 import { JSSDK_TICKET_REDIS_KEY } from '../constants/redis.constant';
