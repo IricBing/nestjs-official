@@ -79,5 +79,5 @@ export class AppModule { }
 ## 文档地址
 
 * [私有Gitlab](https://gitlab.lantsang.cn/nestjs-plugins/nestjs-official/tree/master/docs)
-* [GitHub](https://github.com/lantsang/nesjt-official/tree/master/docs)
+* [GitHub](https://github.com/lantsang/nestjs-official/tree/master/docs)
 * [Gitee](https://gitee.com/lantsang/nestjs-official/tree/master/docs)
