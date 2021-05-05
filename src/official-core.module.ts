@@ -7,6 +7,7 @@ import { OfficialModuleAsyncOptions, OfficialModuleOptions, OfficialOptionsFacto
 import { createRedisClientProvider } from './providers/redis-client.provider';
 import { OfficialAuthService } from './services/auth.service';
 import { OfficialMessageService } from './services/message.service';
+import { OfficialTemplateMessageService } from './services/template-message.service';
 import { EncoderUtil } from './utils/encoder.util';
 import { IricUtil } from './utils/iric.util';
 import { OfficialUtil } from './utils/official.util';
@@ -30,6 +31,7 @@ export class OfficialCoreModule implements OnModuleDestroy {
       providers: [
         OfficialAuthService,
         OfficialMessageService,
+        OfficialTemplateMessageService,
         OfficialUtil,
         TicketUtil,
         XmlUtil,
@@ -41,7 +43,7 @@ export class OfficialCoreModule implements OnModuleDestroy {
         { provide: JSSDK_TICKET_PROVIDER, useValue: { ticket: '', expiresAt: null } },
         { provide: XML_BUILDER_PROVIDER, useValue: new Builder({ rootName: 'xml', cdata: true, headless: true, renderOpts: { indent: ' ', pretty: true } }) }
       ],
-      exports: [OfficialAuthService, OfficialMessageService]
+      exports: [OfficialAuthService, OfficialMessageService, OfficialTemplateMessageService]
     };
   }
 
@@ -59,6 +61,7 @@ export class OfficialCoreModule implements OnModuleDestroy {
         ...asyncProviders,
         OfficialAuthService,
         OfficialMessageService,
+        OfficialTemplateMessageService,
         OfficialUtil,
         TicketUtil,
         XmlUtil,
@@ -69,7 +72,7 @@ export class OfficialCoreModule implements OnModuleDestroy {
         { provide: JSSDK_TICKET_PROVIDER, useValue: { ticket: '', expiresAt: null } },
         { provide: XML_BUILDER_PROVIDER, useValue: new Builder({ rootName: 'xml', cdata: true, headless: true, renderOpts: { indent: ' ', pretty: true } }) }
       ],
-      exports: [OfficialAuthService, OfficialMessageService]
+      exports: [OfficialAuthService, OfficialMessageService, OfficialTemplateMessageService]
     };
   }
 

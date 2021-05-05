@@ -7,6 +7,7 @@ import { OfficialModuleOptions } from '../interfaces/options.interface';
 import { DecryptMessageResponse } from '../interfaces/response/message/decrypt-message.response.interface';
 import { EncryptMessageResponse } from '../interfaces/response/message/encrypt-message.response.interface';
 import { GenerateResponseMessageResponse } from '../interfaces/response/message/generate-response-message.response.interface';
+import { GenerateTXTResponseMessageResponse } from '../interfaces/response/message/generate-txt-response-message.reponse.interface';
 import { XML } from '../types/xml.type';
 import { EncoderUtil } from '../utils/encoder.util';
 import { OfficialUtil } from '../utils/official.util';
@@ -30,6 +31,28 @@ export class OfficialMessageService {
   @OfficialErrorWrapper({ type: FunctionType.Sync })
   generateResponseMessage(params: GenerateOfficialResponseParams): GenerateResponseMessageResponse {
     return { success: true, data: this.xmlUtil.object2xml(params) };
+  }
+
+  /**
+   * 生成文本类型返回消息
+   * @param toUser 接收人
+   * @param fromUser 消息发起人
+   * @param content 文本内容
+   * @returns 文本类型返回消息
+   */
+  @OfficialErrorWrapper({ type: FunctionType.Sync })
+  generateTXTResponseMessage(toUser: string, fromUser: string, content: string): GenerateTXTResponseMessageResponse {
+    const data = `
+        <xml>
+          <ToUserName><![CDATA[${fromUser}]]></ToUserName>
+          <FromUserName><![CDATA[${toUser}]]></FromUserName>
+          <CreateTime>${Math.floor(Date.now() / 1000)}</CreateTime>
+          <MsgType><![CDATA[text]]></MsgType>
+          <Content><![CDATA[${content}]]></Content>
+        </xml>
+      `;
+
+    return { success: true, data };
   }
 
   /**

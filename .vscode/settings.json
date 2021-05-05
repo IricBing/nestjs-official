@@ -36,7 +36,11 @@
     "errmsg",
     "jsapi",
     "lantsnag",
+    "miniprogram",
+    "msgid",
     "nestjs",
-    "setex"
+    "pagepath",
+    "setex",
+    "touser"
   ]
 }
