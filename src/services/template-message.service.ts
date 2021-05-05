@@ -1,5 +1,5 @@
 import { HttpService, Injectable } from '@nestjs/common';
-import JsonBig from 'json-bigint';
+import * as JsonBig from 'json-bigint';
 import { OFFICIAL_SEND_TEMPLATE_MESSAGE_URL } from '../constants/official.constant';
 import { OfficialErrorWrapper } from '../decorators/error-wrapper.decorator';
 import { OfficialError } from '../errors/official.error';
