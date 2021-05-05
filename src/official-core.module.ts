@@ -1,12 +1,17 @@
 import { DynamicModule, Global, HttpModule, Module, OnModuleDestroy, Provider } from '@nestjs/common';
 import { ModuleRef } from '@nestjs/core';
 import { Redis } from 'ioredis';
-import { ACCESS_TOKEN_CONFIG_PROVIDER, JSSDK_TICKET_PROVIDER, OPTIONS_PROVIDER, REDIS_CLIENT_PROVIDER } from './constants/common.constant';
+import { Builder } from 'xml2js';
+import { ACCESS_TOKEN_CONFIG_PROVIDER, JSSDK_TICKET_PROVIDER, OPTIONS_PROVIDER, REDIS_CLIENT_PROVIDER, XML_BUILDER_PROVIDER } from './constants/common.constant';
 import { OfficialModuleAsyncOptions, OfficialModuleOptions, OfficialOptionsFactory } from './interfaces/options.interface';
 import { createRedisClientProvider } from './providers/redis-client.provider';
+import { OfficialAuthService } from './services/auth.service';
+import { OfficialMessageService } from './services/message.service';
+import { EncoderUtil } from './utils/encoder.util';
 import { IricUtil } from './utils/iric.util';
 import { OfficialUtil } from './utils/official.util';
 import { TicketUtil } from './utils/ticket.util';
+import { XmlUtil } from './utils/xml.util';
 
 @Global()
 @Module({})
@@ -23,15 +28,20 @@ export class OfficialCoreModule implements OnModuleDestroy {
       module: OfficialCoreModule,
       imports: [HttpModule],
       providers: [
+        OfficialAuthService,
+        OfficialMessageService,
         OfficialUtil,
         TicketUtil,
+        XmlUtil,
+        EncoderUtil,
         IricUtil,
         createRedisClientProvider(),
         { provide: OPTIONS_PROVIDER, useValue: options },
         { provide: ACCESS_TOKEN_CONFIG_PROVIDER, useValue: { token: '', expiresAt: null } },
-        { provide: JSSDK_TICKET_PROVIDER, useValue: { ticket: '', expiresAt: null } }
+        { provide: JSSDK_TICKET_PROVIDER, useValue: { ticket: '', expiresAt: null } },
+        { provide: XML_BUILDER_PROVIDER, useValue: new Builder({ rootName: 'xml', cdata: true, headless: true, renderOpts: { indent: ' ', pretty: true } }) }
       ],
-      exports: []
+      exports: [OfficialAuthService, OfficialMessageService]
     };
   }
 
@@ -47,14 +57,19 @@ export class OfficialCoreModule implements OnModuleDestroy {
       imports: [...(options.imports || []), HttpModule],
       providers: [
         ...asyncProviders,
+        OfficialAuthService,
+        OfficialMessageService,
         OfficialUtil,
         TicketUtil,
+        XmlUtil,
+        EncoderUtil,
         IricUtil,
         createRedisClientProvider(),
         { provide: ACCESS_TOKEN_CONFIG_PROVIDER, useValue: { token: '', expiresAt: null } },
-        { provide: JSSDK_TICKET_PROVIDER, useValue: { ticket: '', expiresAt: null } }
+        { provide: JSSDK_TICKET_PROVIDER, useValue: { ticket: '', expiresAt: null } },
+        { provide: XML_BUILDER_PROVIDER, useValue: new Builder({ rootName: 'xml', cdata: true, headless: true, renderOpts: { indent: ' ', pretty: true } }) }
       ],
-      exports: []
+      exports: [OfficialAuthService, OfficialMessageService]
     };
   }
 

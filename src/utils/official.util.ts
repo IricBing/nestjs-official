@@ -68,10 +68,23 @@ export class OfficialUtil implements OnModuleInit {
    * @param encryptMsg 微信加密信息
    * @returns 签名校验成功与否
    */
-  checkSignature(timestamp: string, nonce: string, signature: string, encryptMsg?: string): boolean {
-    const tempStr = [this.options.authToken, timestamp, nonce, encryptMsg].sort().join('');
+  checkSignature(timestamp: string, nonce: string, signature: string, encryptMessage?: string): boolean {
+    const tempStr = [this.options.authToken, timestamp, nonce, encryptMessage].sort().join('');
 
     return createHash('sha1').update(tempStr, 'utf8').digest('hex') === signature;
+  }
+
+  /**
+   * 对信息进行签名
+   * @param timestamp 签名时间戳
+   * @param nonce 随机字符串
+   * @param message 原始内容
+   * @returns 签名结果
+   */
+  messageSignature(timestamp: string, nonce: string, message: string): string {
+    const tempStr = [this.options.authToken, timestamp, nonce, message].sort().join('');
+
+    return createHash('sha1').update(tempStr, 'utf8').digest('hex');
   }
 
   /** 重新获取access token */

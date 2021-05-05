@@ -65,3 +65,11 @@ export const OFFICIAL_GENERATE_SHORT_URL_URL = 'https://api.weixin.qq.com/cgi-bi
  * @example https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&redirect_uri=${redirectUrl}&response_type=code&scope=${scop}&state=${state}#wechat_redirect
  */
 export const OFFICIAL_OAUTH2_URL = 'https://open.weixin.qq.com/connect/oauth2/authorize';
+
+/** 公众号返回状态码 */
+export const enum OfficialResponseCode {
+  /** 成功 */
+  Success = 'SUCCESS',
+  /** 失败 */
+  Fail = 'FAIL'
+}
