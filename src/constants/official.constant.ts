@@ -12,6 +12,13 @@ export const OFFICIAL_GET_ACCESS_TOKEN_URL = 'https://api.weixin.qq.com/cgi-bin/
 export const OFFICIAL_CREATE_MENU_URL = 'https://api.weixin.qq.com/cgi-bin/menu/create';
 
 /**
+ * 删除公众号个性化菜单接口
+ * @see https://developers.weixin.qq.com/doc/offiaccount/Custom_Menus/Deleting_Custom-Defined_Menu.html
+ * @example https://api.weixin.qq.com/cgi-bin/menu/delete?access_token=${accessToken}
+ */
+export const OFFICIAL_DELETE_MENU_URL = 'https://api.weixin.qq.com/cgi-bin/menu/delete';
+
+/**
  * 获取公众号自定义菜单接口
  * @see https://developers.weixin.qq.com/doc/offiaccount/Custom_Menus/Querying_Custom_Menus.html
  * @example https://api.weixin.qq.com/cgi-bin/menu/get?access_token=${accessToken}

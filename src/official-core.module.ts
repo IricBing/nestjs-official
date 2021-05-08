@@ -6,6 +6,8 @@ import { ACCESS_TOKEN_CONFIG_PROVIDER, JSSDK_TICKET_PROVIDER, OPTIONS_PROVIDER, 
 import { OfficialModuleAsyncOptions, OfficialModuleOptions, OfficialOptionsFactory } from './interfaces/options.interface';
 import { createRedisClientProvider } from './providers/redis-client.provider';
 import { OfficialAuthService } from './services/auth.service';
+import { OfficialCustomMenuService } from './services/custom-menu.service';
+import { OfficialMenuService } from './services/menu.service';
 import { OfficialMessageService } from './services/message.service';
 import { OfficialTemplateMessageService } from './services/template-message.service';
 import { EncoderUtil } from './utils/encoder.util';
@@ -32,6 +34,8 @@ export class OfficialCoreModule implements OnModuleDestroy {
         OfficialAuthService,
         OfficialMessageService,
         OfficialTemplateMessageService,
+        OfficialMenuService,
+        OfficialCustomMenuService,
         OfficialUtil,
         TicketUtil,
         XmlUtil,
@@ -43,7 +47,7 @@ export class OfficialCoreModule implements OnModuleDestroy {
         { provide: JSSDK_TICKET_PROVIDER, useValue: { ticket: '', expiresAt: null } },
         { provide: XML_BUILDER_PROVIDER, useValue: new Builder({ rootName: 'xml', cdata: true, headless: true, renderOpts: { indent: ' ', pretty: true } }) }
       ],
-      exports: [OfficialAuthService, OfficialMessageService, OfficialTemplateMessageService]
+      exports: [OfficialAuthService, OfficialMessageService, OfficialTemplateMessageService, OfficialMenuService, OfficialCustomMenuService]
     };
   }
 
@@ -62,6 +66,8 @@ export class OfficialCoreModule implements OnModuleDestroy {
         OfficialAuthService,
         OfficialMessageService,
         OfficialTemplateMessageService,
+        OfficialMenuService,
+        OfficialCustomMenuService,
         OfficialUtil,
         TicketUtil,
         XmlUtil,
@@ -72,7 +78,7 @@ export class OfficialCoreModule implements OnModuleDestroy {
         { provide: JSSDK_TICKET_PROVIDER, useValue: { ticket: '', expiresAt: null } },
         { provide: XML_BUILDER_PROVIDER, useValue: new Builder({ rootName: 'xml', cdata: true, headless: true, renderOpts: { indent: ' ', pretty: true } }) }
       ],
-      exports: [OfficialAuthService, OfficialMessageService, OfficialTemplateMessageService]
+      exports: [OfficialAuthService, OfficialMessageService, OfficialTemplateMessageService, OfficialMenuService, OfficialCustomMenuService]
     };
   }
 

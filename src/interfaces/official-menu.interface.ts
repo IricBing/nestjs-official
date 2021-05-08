@@ -1,36 +1,3 @@
-# 公众号菜单相关
-
-`注意` ：这里的菜单均是指通过代码创建的菜单，不能是在控制台手动创建的，手动创建的菜单格式与代码创建的不一样！**切勿在控制台手动创建后通过代码进行维护**！
-
-公众号的菜单有两种，一种是**普适性**的菜单，就是大家看到的都一样，一种是**个性化**菜单，就是不同的用户群体看到的菜单是不一样的。
-
-## 普通菜单
-
-普通菜单相关服务封装于 `OfficialMenuService` 类中，可通过如下方式引入：
-
-``` typescript
-import { OfficialMenuService } from '@lantsang/nestjs-official'
-```
-
-### 创建/更新菜单
-
-微信公众号将**创建**和**更新**接口**合二为一**，也就是每次改动菜单均是**全量覆盖**。
-
-``` typescript
-/**
- * 创建/更新公众号菜单
- * @param data 公众号菜单信息
- * @returns 创建/更新结果
- */
-async create(data: OfficialMenu): Promise<CreateMenuResponse> {}
-```
-
-其中 `OfficialMenu` 类型的定义如下所示：
-
-<details>
-<summary>展开查看OfficialMenu类型定义</summary>
-
-``` typescript
 import { OfficialMenuButtonType } from '../constants/official.constant';
 
 /** 二级菜单按钮 */
@@ -106,37 +73,3 @@ export interface OfficialMenu {
   /** 一级菜单列表 */
   button: OfficialMenuButton[];
 }
-
-```
-
-</details>
-
-### 删除菜单
-
-`注意：` 在调用删除接口时，会**同时删除普通菜单和所有个性化菜单**！
-
-``` typescript
-/**
- * 删除公众号菜单
- * @returns 删除结果
- */
-async delete(): Promise<DeleteMenuResponse> {}
-```
-
-### 查询菜单
-
-``` typescript
-/**
- * 查询公众号菜单信息
- * @returns 查询结果
- */
-async query(): Promise<QueryMenuResponse> {}
-```
-
-## 个性化菜单
-
-个性化菜单相关服务封装于 `OfficialCustomMenuService` 类中，可通过如下方式引入：
-
-``` typescript
-import { OfficialCustomMenuService } from '@lantsang/nestjs-official'
-```
