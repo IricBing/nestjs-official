@@ -31,10 +31,13 @@
     "Iric",
     "JSSDK",
     "Parens",
+    "WECHAT",
     "Weixin",
     "disturl",
     "errcode",
     "errmsg",
+    "groupid",
+    "headimgurl",
     "jsapi",
     "lantsang",
     "lantsnag",
@@ -42,8 +45,13 @@
     "miniprogram",
     "msgid",
     "nestjs",
+    "openid",
     "pagepath",
     "setex",
-    "touser"
+    "snsapi",
+    "tagid",
+    "touser",
+    "unionid",
+    "userinfo"
   ]
 }

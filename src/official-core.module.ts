@@ -10,6 +10,7 @@ import { OfficialCustomMenuService } from './services/custom-menu.service';
 import { OfficialMenuService } from './services/menu.service';
 import { OfficialMessageService } from './services/message.service';
 import { OfficialTemplateMessageService } from './services/template-message.service';
+import { OfficialUserService } from './services/user.service';
 import { EncoderUtil } from './utils/encoder.util';
 import { IricUtil } from './utils/iric.util';
 import { OfficialUtil } from './utils/official.util';
@@ -32,6 +33,7 @@ export class OfficialCoreModule implements OnModuleDestroy {
       imports: [HttpModule],
       providers: [
         OfficialAuthService,
+        OfficialUserService,
         OfficialMessageService,
         OfficialTemplateMessageService,
         OfficialMenuService,
@@ -47,7 +49,7 @@ export class OfficialCoreModule implements OnModuleDestroy {
         { provide: JSSDK_TICKET_PROVIDER, useValue: { ticket: '', expiresAt: null } },
         { provide: XML_BUILDER_PROVIDER, useValue: new Builder({ rootName: 'xml', cdata: true, headless: true, renderOpts: { indent: ' ', pretty: true } }) }
       ],
-      exports: [OfficialAuthService, OfficialMessageService, OfficialTemplateMessageService, OfficialMenuService, OfficialCustomMenuService]
+      exports: [OfficialAuthService, OfficialUserService, OfficialMessageService, OfficialTemplateMessageService, OfficialMenuService, OfficialCustomMenuService]
     };
   }
 
@@ -64,6 +66,7 @@ export class OfficialCoreModule implements OnModuleDestroy {
       providers: [
         ...asyncProviders,
         OfficialAuthService,
+        OfficialUserService,
         OfficialMessageService,
         OfficialTemplateMessageService,
         OfficialMenuService,
@@ -78,7 +81,7 @@ export class OfficialCoreModule implements OnModuleDestroy {
         { provide: JSSDK_TICKET_PROVIDER, useValue: { ticket: '', expiresAt: null } },
         { provide: XML_BUILDER_PROVIDER, useValue: new Builder({ rootName: 'xml', cdata: true, headless: true, renderOpts: { indent: ' ', pretty: true } }) }
       ],
-      exports: [OfficialAuthService, OfficialMessageService, OfficialTemplateMessageService, OfficialMenuService, OfficialCustomMenuService]
+      exports: [OfficialAuthService, OfficialUserService, OfficialMessageService, OfficialTemplateMessageService, OfficialMenuService, OfficialCustomMenuService]
     };
   }
 

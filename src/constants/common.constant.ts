@@ -36,3 +36,13 @@ export const enum EncryptType {
   /** ase 256加密 */
   ASE256CBC = 'aes-256-cbc'
 }
+
+/** 微信语言版本 */
+export const enum OfficialLanguageType {
+  /** 简体 */
+  ZH_CN = 'zh_CN',
+  /** 繁体 */
+  ZH_TW = 'zh_TW',
+  /** 英语 */
+  EN = 'en'
+}
