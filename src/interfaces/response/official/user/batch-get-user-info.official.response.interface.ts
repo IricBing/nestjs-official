@@ -1,36 +1,8 @@
-# 获取用户基本信息——UnionID机制
+import { OfficialLanguageType } from '../../../../constants/common.constant';
+import { OfficialSubscribeScene } from '../../../../constants/official.constant';
+import { OfficialBaseResponse } from '../base.official.response.interface';
 
-获取用户基本信息[官方文档](https://developers.weixin.qq.com/doc/offiaccount/User_Management/Get_users_basic_information_UnionID.html#UinonId)
-
-相关服务封装于 `OfficialUserService` 类中，可通过如下方式引入：
-
-```typescript
-import { OfficialUserService } from '@lantsang/nestjs-official'
-```
-
-用法：
-
-```typescript
-/**
- * 获取用户基本信息（UnionID机制）
- * @param openId 公众号OpenId
- * @param lang 返回国家地区语言版本，默认简体中文
- * @returns 公众号用户信息
- */
-async getInfo(openId: string, lang = OfficialLanguageType.ZH_CN): Promise<GetUserInfoResponse> {}
-```
-
-其中返回类型 `GetUserInfoResponse` 中的 `data` 字段为 `OfficialUserInfo` 类型，该类型可以通过如下方式从包中引入：
-
-```typescript
-import { OfficialUserInfo } from '@lantsang/nestjs-official'
-```
-
-`OfficialUserInfo` 类型的详细定义为：
-
-```typescript
-/** 公众号用户信息 */
-export interface OfficialUserInfo {
+interface OfficialBatchGetUserInfoResponseUserInfo {
   /** 用户是否订阅该公众号标识，值为0时，代表此用户没有关注该公众号，拉取不到其余信息。 */
   subscribe: 0 | 1;
   /** 用户的标识，对当前公众号唯一 */
@@ -87,17 +59,9 @@ export interface OfficialUserInfo {
   /** 二维码扫码场景描述（开发者自定义） */
   qr_scene_str: string;
 }
-```
 
-## 批量获取用户信息
-
-用法：
-
-```typescript
-/**
- * 批量获取用户基本信息（UnionID机制）
- * @param params 用户openId和语言列表
- * @returns 用户信息列表
- */
-async batchGetInfo(params: BatchGetUserInfoParams[]): Promise<BatchGetUserInfoResponse> {}
-```
+/** 批量获取公众号用户基本信息（UnionID机制）返回类型 */
+export interface OfficialBatchGetUserInfoResponse extends OfficialBaseResponse {
+  /** 用户信息列表 */
+  user_info_list: OfficialBatchGetUserInfoResponseUserInfo[];
+}

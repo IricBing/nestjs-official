@@ -62,6 +62,20 @@ export const OFFICIAL_GET_USER_INFO_BY_TOKEN_URL = 'https://api.weixin.qq.com/sn
 export const OFFICIAL_GET_USER_INFO_BY_OPEN_ID_URL = 'https://api.weixin.qq.com/cgi-bin/user/info';
 
 /**
+ * 根据openId批量获取用户信息
+ * @see https://developers.weixin.qq.com/doc/offiaccount/User_Management/Get_users_basic_information_UnionID.html#UinonId
+ * @example https://api.weixin.qq.com/cgi-bin/user/info/batchget?access_token=${accessToken}&openid=${openid}&lang=zh_CN
+ */
+export const OFFICIAL_BATCH_GET_USER_INFO_BY_OPEN_ID_URL = 'https://api.weixin.qq.com/cgi-bin/user/info/batchget';
+
+/**
+ * 获取关注用户的openid列表
+ * @see https://developers.weixin.qq.com/doc/offiaccount/User_Management/Getting_a_User_List.html
+ * @example https://api.weixin.qq.com/cgi-bin/user/get?access_token=${accessToken}&next_openid=${nextOpenid}
+ */
+export const OFFICIAL_GET_USER_OPENID_LIST_URL = 'https://api.weixin.qq.com/cgi-bin/user/get';
+
+/**
  * 发送模板消息接口
  * @see https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Template_Message_Interface.html
  * @example https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=${accessToken}
