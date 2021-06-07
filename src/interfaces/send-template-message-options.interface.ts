@@ -9,10 +9,7 @@ export interface SendTemplateMessageOptions {
   miniprogram?: {
     /** 小程序appid */
     appid: string;
-    /**
-     * 小程序页面路径，可加参数
-     * `注意：` 这里是一个**大坑**！微信文档上写的是pagepath，实际上要传path！！！
-     */
-    path: string;
+    /** 小程序页面路径，可加参数 */
+    pagepath: string;
   };
 }

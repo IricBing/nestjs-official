@@ -1,6 +1,6 @@
 {
   "name": "@lantsang/nestjs-official",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "NestJS 公众号插件",
   "author": "Iric<iricbing@gmail.com>",
   "license": "MIT",
